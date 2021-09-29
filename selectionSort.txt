@@ -1,0 +1,30 @@
+// Online C compiler to run C program online
+//Time Complexity: O(n2)
+//Space Complexity: O(1)
+
+#include <stdio.h>
+
+int main() {
+    int a[] = {14, 5, 1, 78, 9, 3};
+    int i, j, minIndex;
+    
+    for(i = 0; i < 6; i++){//n
+        minIndex = i;
+        
+        for(j = i + 1; j < 6; j++){//n
+            if(a[j] < a[minIndex]){
+                minIndex = j;
+            }
+        }
+        
+        int temp = a[i];
+        a[i] = a[minIndex];
+        a[minIndex] = temp;
+    }
+    
+    for(i = 0; i < 6; i++){
+        printf("%d ", a[i]);
+    }
+    
+    return 0;
+}

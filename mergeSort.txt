@@ -1,0 +1,64 @@
+// Online C compiler to run C program online
+//merge sort algorithm 
+#include <stdio.h>
+
+int arr[100], temp[100];
+
+void merging(int startPoint, int midPoint, int endPoint){
+    int i, firstArrCnt, secArrCnt;
+    firstArrCnt = startPoint;
+    secArrCnt = midPoint + 1;
+    
+    for(i = firstArrCnt; firstArrCnt <= midPoint && secArrCnt <= endPoint; i++){
+        if(arr[firstArrCnt] <= arr[secArrCnt]){
+            temp[i] = arr[firstArrCnt++];
+        }else{
+            temp[i] = arr[secArrCnt++];
+        }
+    }
+    
+    while(firstArrCnt <= midPoint){
+        temp[i++] = arr[firstArrCnt++];
+    }
+    
+    while(secArrCnt <= endPoint){
+        temp[i++] = arr[secArrCnt++];
+    }
+    
+    for(i = startPoint; i <= endPoint; i++){
+        arr[i] = temp[i];
+    }
+}
+
+void sorting(int startPoint, int endPoint){
+    int midPoint;
+    
+    if(startPoint >= endPoint){
+        return;
+    }
+    
+    midPoint = (startPoint + endPoint) / 2;
+    
+    sorting(startPoint, midPoint);
+    sorting(midPoint+1, endPoint);
+    
+    merging(startPoint, midPoint, endPoint);
+}
+int main() {
+    int n, i;
+    printf("Enter number of elements: \n");
+    scanf("%d", &n);
+    printf("Enter %d elements: \n", n);
+    
+    for(i = 0; i < n; i++){
+        scanf("%d", &arr[i]);
+    }
+    
+    sorting(0, n-1);
+    
+    printf("\n After sorting the array: \n");
+    for(i = 0; i < n; i++){
+        printf("%d ", arr[i]);
+    }
+    return 0;
+}

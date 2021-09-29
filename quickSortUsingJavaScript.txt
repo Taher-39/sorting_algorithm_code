@@ -1,0 +1,56 @@
+var arr= [2, 7, 1, 8, 6, 3, 5, 4];
+var newArr = [];
+function display(){
+    
+    for(let i = 0; i < arr.length; i++){
+        newArr.push(arr[i])
+    }
+    console.log(newArr)
+}
+
+function swapFunction(leftIndex, rightIndex){
+    var temp = arr[leftIndex];
+    arr[leftIndex] = arr[rightIndex];
+    arr[rightIndex] = temp;
+}
+
+function partitionFunction(left, right, pivot){
+    var leftPointer = left -1;
+    var rightPointer = right;
+    while(true){
+        while(arr[++leftPointer] < pivot){
+            //do nothing
+        }
+        while(rightPointer > 0 && arr[--rightPointer] > pivot){
+            //do nothing
+        }
+        if(leftPointer >= rightPointer){
+            break;
+        }else{
+            swapFunction(leftPointer, rightPointer);
+        }
+    }
+    swapFunction(leftPointer, right);
+    
+    return leftPointer;
+}
+
+function quickSort(left, right){
+    if(right - left <= 0){
+        return;
+    }else{
+        let pivot = arr[right];
+        let partitionPoint = partitionFunction(left, right, pivot);
+        quickSort(left, partitionPoint - 1);
+        quickSort(partitionPoint + 1, right);
+    }
+    
+}
+
+function main(){
+    console.log(arr)
+    quickSort(0, arr.length - 1);
+    display();
+}
+
+main();

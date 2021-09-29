@@ -1,0 +1,30 @@
+// Online C compiler to run C program online
+//Time Complexity: O(n2)
+//Space Complixity: O(1)
+#include <stdio.h>
+
+int main() {
+    int a[] = {2,  5, 7, 1, 6};
+    int value, space, i;
+    
+    for(i = 1; i < 5; i++){//n
+       value = a[i];
+       space = i;
+       
+       while(space > 0 && a[space -1] > value){//n
+           a[space] = a[space -1];
+           space--;
+       }
+       
+       a[space] = value;
+    }
+    printf("\n\n");
+    
+    for(i = 0; i < 5; i++){
+        printf("%d ", a[i]);
+    }
+    
+    printf("\n\n");
+    
+    return 0;
+}

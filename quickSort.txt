@@ -1,0 +1,66 @@
+//quick sort using c
+// Online C compiler to run C program online
+#include <stdio.h>
+#include<stdbool.h>
+#define MAX 8
+
+int arr[MAX] = {2, 7, 1, 8, 6, 3, 5, 4};
+
+void display(){
+    int i;
+    printf("[");
+    for(i = 0; i < MAX; i++){
+        printf("%d, ", arr[i]);
+    }
+    printf("]\n");
+}
+
+void swapFunction(int leftIndex, int rightIndex){
+    int temp = arr[leftIndex];
+    arr[leftIndex] = arr[rightIndex];
+    arr[rightIndex] = temp;
+}
+int partitionFunction(int left, int right, int pivot){
+    int leftPointer = left - 1;
+    int rightPointer = right;
+    
+    while(true){
+        while(arr[++leftPointer] < pivot){
+            //do nothing
+        }
+        while(rightPointer > 0 && arr[--rightPointer] > pivot){
+            //do nothing
+        }
+        
+        if(leftPointer >= rightPointer){
+            break;
+        }else{
+            swapFunction(leftPointer, rightPointer);
+        }
+    }
+    swapFunction(leftPointer, right);
+    
+    return leftPointer;
+}
+
+void quickSort(int left, int right){
+    if(right-left <= 0){
+        return;
+    }else{
+        int pivot = arr[right];
+        int partitionPoint = partitionFunction(left, right, pivot);
+        quickSort(left, partitionPoint - 1);
+        quickSort(partitionPoint + 1, right);
+    }
+}
+
+int main() {
+    
+    printf("Input Array: ");
+    display();
+    quickSort(0, MAX-1);
+    printf("Sorted Array: ");
+    display();
+    return 0;
+    
+}
